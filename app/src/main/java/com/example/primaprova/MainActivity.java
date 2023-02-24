@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
     private EditText importoEditText;
-    private EditText cambioEditText;
     private TextView risultatoTextView;
+    private double tassoDiCambio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,19 +22,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         importoEditText = findViewById(R.id.importo_edittext);
-        cambioEditText = findViewById(R.id.cambio_edittext);
         risultatoTextView = findViewById(R.id.risultato_textview);
+
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = group.findViewById(checkedId);
+                String tassoDiCambioString = radioButton.getTag().toString();
+                tassoDiCambio = Double.parseDouble(tassoDiCambioString);
+            }
+        });
 
         Button calcolaButton = findViewById(R.id.calcola_button);
         calcolaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                double importo = Double.parseDouble(importoEditText.getText().toString());
-                double cambio = Double.parseDouble(cambioEditText.getText().toString());
-                double dollari = importo * cambio;
-                double euro = importo / cambio;
-                risultatoTextView.setText(String.format(Locale.getDefault(), "%.2f $ = %.2f €", dollari, euro));
+                try {
+                    double importo = Double.parseDouble(importoEditText.getText().toString());
+                    double convertedAmount = tassoDiCambio * importo;
+                    String result = String.format(Locale.getDefault(), "%.2f", convertedAmount);
+                    risultatoTextView.setText(result);
+                } catch (NumberFormatException e) {
+                    risultatoTextView.setText("Inserisci un importo valido");
+                }
             }
         });
     }
-}
 
+}

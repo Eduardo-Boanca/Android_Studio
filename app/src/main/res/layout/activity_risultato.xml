@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".RisultatoActivity">
+
+    <TextView
+        android:id="@+id/tasso_di_cambio_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Tasso di cambio: "
+        android:layout_marginTop="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/importo_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Importo: "
+        android:layout_below="@+id/tasso_di_cambio_textview"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/risultato_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Risultato: "
+        android:layout_below="@+id/importo_textview"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
